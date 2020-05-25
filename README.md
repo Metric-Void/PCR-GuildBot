@@ -2,6 +2,9 @@
 PCR工会战机器人基于C# Native.Sdk。用户可使用指令登记模拟战信息，统计战况，给出预估伤害值，并使用预估的伤害数值进行排刀。    
 <s>我不是很擅长C# 但是酷Q的Java SDK实属拉跨 饶了我吧（</s>
 
+### 下载
+[GitHub Releases](https://github.com/Metric-Void/PCR-GuildBot/releases)
+
 ### 伤害预估机制
 伤害预估基于Gaussian分布。算法使用ML Estimation，基于用户的模拟战数据构建Gaussian分布模型，根据Central Limit Theorem构建各个概率下的预估值，并根据Chebyshev Inequality，给出各个预估值的置信度。用户输入的模拟战数据越多，预估值的置信度越高。
 
