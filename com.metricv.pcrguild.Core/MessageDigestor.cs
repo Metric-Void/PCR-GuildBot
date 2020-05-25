@@ -436,7 +436,11 @@ namespace com.metricv.pcrguild.Code {
                 }
 
                 sb.AppendLine($"整合后有{teamedDamages.Keys.Count}个队伍");
-
+                if(teamedDamages.Keys.Count>90) {
+                    sb.AppendLine("啊 这队伍数量太多了（最多90个）");
+                    sb.AppendLine("请各位先删除掉不参战的队伍（使用指令“队伍列表”查看登记的队伍，“查询 周目=xxx BOSS=xx” 查看记录，然后“删除 队伍=<队伍名>” 删掉不用的队伍）");
+                    return;
+                }
                 // Find Gaussian for each team.
                 Dictionary<String, Double> predictedDamages = new Dictionary<string, double>();
                 foreach(KeyValuePair<String, List<int>> e in teamedDamages) {
@@ -526,7 +530,7 @@ namespace com.metricv.pcrguild.Code {
                 sb.AppendLine(head);
             if (cmd == "版本") {
                 sb.AppendLine("行会战计算器 by MetricVoid");
-                sb.AppendLine("ver. 1.0.0 - ALPHA");
+                sb.AppendLine("ver. 1.0.2 - ALPHA");
                 sb.AppendLine("使用 行会战#帮助 查看帮助");
             } else if (rx_addRecord.IsMatch(cmd)) {
                 proc_addRecord(ref sb, cmd, fromQQ, fromGroup);

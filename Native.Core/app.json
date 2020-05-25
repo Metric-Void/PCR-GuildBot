@@ -6,7 +6,7 @@
 	"ret": 1,
 	"apiver": 9,
 	"name": "公主焊接工会战排刀器",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"version_id": 1,
 	"author": "MetricVoid",
 	"description": "使用概率分布和背包问题 收集数据来排刀",
