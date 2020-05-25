@@ -5,30 +5,30 @@
 {
 	"ret": 1,
 	"apiver": 9,
-	"name": "酷Q样例应用 for C#",
+	"name": "公主焊接工会战排刀器",
 	"version": "1.0.0",
 	"version_id": 1,
-	"author": "JieGG",
-	"description": "酷Q样例应用(V9应用机制)",
+	"author": "MetricVoid",
+	"description": "使用概率分布和背包问题 收集数据来排刀",
 	"event": [
 		{
 			"id": 1,
 			"type": 21,
-			"name": "私聊消息处理",
+			"name": "CommandDigestPrivate",
 			"function": "_eventPrivateMsg",
-			"priority": 30000
+			"priority": "20000"
 		},
 		{
 			"id": 2,
 			"type": 2,
-			"name": "群消息处理",
+			"name": "CommandDigestGroup",
 			"function": "_eventGroupMsg",
-			"priority": 30000
+			"priority": 20000
 		},
 		{
 			"id": 3,
 			"type": 4,
-			"name": "讨论组消息处理",
+			"name": "CommandDigestDiscuss",
 			"function": "_eventDiscussMsg",
 			"priority": 30000
 		},
@@ -118,23 +118,10 @@
 		}
 	],
 	"menu": [ // 设置菜单（发布前请删除无用菜单，如果无需设置菜单请全部删除）
-		{
-			"name": "设置A", //菜单名称
-			"function": "_menuA" //菜单对应函数
-		},
-		{
-			"name": "设置B",
-			"function": "_menuB"
-		}
+
 	],
 	"status": [ // 悬浮窗状态（见 com.example.status 样例）
-		{
-			"id": 1, // 悬浮窗ID
-			"name": "运行时间", // 名称
-			"title": "UPTIME", // 英文名称
-			"function": "_statusUptime", // 数据更新对应函数
-			"period": "1000" // 更新间隔（单位ms（毫秒），目前仅支持1000ms（1秒））
-		}
+
 	],
 	"auth": [ // 应用权限（发布前请删除无用权限）
 		//20,  //[敏感]取Cookies    getCookies / getCsrfToken
@@ -143,24 +130,24 @@
 		103, //发送讨论组消息     sendDiscussMsg
 		106, //发送私聊消息       sendPrivateMsg
 		//110, //[敏感]发送赞       sendLike
-		120, //置群员移除         setGroupKick
-		121, //置群员禁言         setGroupBan
-		122, //置群管理员         setGroupAdmin
-		123, //置全群禁言         setGroupWholeBan
-		124, //置匿名群员禁言     setGroupAnonymousBan
-		125, //置群匿名设置       setGroupAnonymous
-		126, //置群成员名片       setGroupCard
+		//120, //置群员移除         setGroupKick
+		//121, //置群员禁言         setGroupBan
+		//122, //置群管理员         setGroupAdmin
+		//123, //置全群禁言         setGroupWholeBan
+		//124, //置匿名群员禁言     setGroupAnonymousBan
+		//125, //置群匿名设置       setGroupAnonymous
+		//126, //置群成员名片       setGroupCard
 		//127, //[敏感]置群退出     setGroupLeave
-		128, //置群成员专属头衔   setGroupSpecialTitle
-		130, //取群成员信息       getGroupMemberInfo
-		131, //取陌生人信息       getStrangerInfo
-		132, //取群信息           getGroupInfo
+		//128, //置群成员专属头衔   setGroupSpecialTitle
+		//130, //取群成员信息       getGroupMemberInfo
+		//131, //取陌生人信息       getStrangerInfo
+		//132, //取群信息           getGroupInfo
 		140, //置讨论组退出       setDiscussLeave
 		150, //置好友添加请求     setFriendAddRequest
 		151, //置群添加请求       setGroupAddRequest
-		160, //取群成员列表       getGroupMemberList
-		161, //取群列表           getGroupList
-		162, //取好友列表         getFriendList
-		180 //撤回消息           deleteMsg
+		//160, //取群成员列表       getGroupMemberList
+		//161, //取群列表           getGroupList
+		//162, //取好友列表         getFriendList
+		//180 //撤回消息           deleteMsg
 	]
 }

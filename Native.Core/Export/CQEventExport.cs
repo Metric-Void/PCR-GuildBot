@@ -50,7 +50,7 @@ namespace Native.App.Export
 		[DllExport (ExportName = "AppInfo", CallingConvention = CallingConvention.StdCall)]	
 		private static string AppInfo ()	
 		{	
-			return "9,Native.Core";	
+			return "9,com.metricv.pcrguild";	
 		}	
 		
 		/// <summary>	
@@ -64,12 +64,12 @@ namespace Native.App.Export
 			// 反射获取 AppData 实例	
 			Type appDataType = typeof (AppData);	
 			// 注册一个 CQApi 实例	
-			AppInfo appInfo = new AppInfo ("Native.Core", 1, 9, "酷Q样例应用 for C#", "1.0.0", 1, "JieGG", "酷Q样例应用(V9应用机制)", authCode);	
+			AppInfo appInfo = new AppInfo ("com.metricv.pcrguild", 1, 9, "公主焊接工会战排刀器", "1.0.0", 1, "MetricVoid", "使用概率分布和背包问题 收集数据来排刀", authCode);	
 			appDataType.GetRuntimeProperty ("CQApi").GetSetMethod (true).Invoke (null, new object[] { new CQApi (appInfo) });	
-			AppData.UnityContainer.RegisterInstance<CQApi> ("Native.Core", AppData.CQApi);	
+			AppData.UnityContainer.RegisterInstance<CQApi> ("com.metricv.pcrguild", AppData.CQApi);	
 			// 向容器注册一个 CQLog 实例	
 			appDataType.GetRuntimeProperty ("CQLog").GetSetMethod (true).Invoke (null, new object[] { new CQLog (authCode) });	
-			AppData.UnityContainer.RegisterInstance<CQLog> ("Native.Core", AppData.CQLog);	
+			AppData.UnityContainer.RegisterInstance<CQLog> ("com.metricv.pcrguild", AppData.CQLog);	
 			// 注册插件全局异常捕获回调, 用于捕获未处理的异常, 回弹给 酷Q 做处理	
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;	
 			// 本函数【禁止】处理其他任何代码，以免发生异常情况。如需执行初始化代码请在Startup事件中执行（Type=1001）。	
@@ -103,37 +103,37 @@ namespace Native.App.Export
 			/*	
 			 * Id: 1	
 			 * Type: 21	
-			 * Name: 私聊消息处理	
+			 * Name: CommandDigestPrivate	
 			 * Function: _eventPrivateMsg	
-			 * Priority: 30000	
+			 * Priority: 20000	
 			 */	
-			if (AppData.UnityContainer.IsRegistered<IPrivateMessage> ("私聊消息处理"))	
+			if (AppData.UnityContainer.IsRegistered<IPrivateMessage> ("CommandDigestPrivate"))	
 			{	
-				Event_eventPrivateMsgHandler += AppData.UnityContainer.Resolve<IPrivateMessage> ("私聊消息处理").PrivateMessage;	
+				Event_eventPrivateMsgHandler += AppData.UnityContainer.Resolve<IPrivateMessage> ("CommandDigestPrivate").PrivateMessage;	
 			}	
 			
 			/*	
 			 * Id: 2	
 			 * Type: 2	
-			 * Name: 群消息处理	
+			 * Name: CommandDigestGroup	
 			 * Function: _eventGroupMsg	
-			 * Priority: 30000	
+			 * Priority: 20000	
 			 */	
-			if (AppData.UnityContainer.IsRegistered<IGroupMessage> ("群消息处理"))	
+			if (AppData.UnityContainer.IsRegistered<IGroupMessage> ("CommandDigestGroup"))	
 			{	
-				Event_eventGroupMsgHandler += AppData.UnityContainer.Resolve<IGroupMessage> ("群消息处理").GroupMessage;	
+				Event_eventGroupMsgHandler += AppData.UnityContainer.Resolve<IGroupMessage> ("CommandDigestGroup").GroupMessage;	
 			}	
 			
 			/*	
 			 * Id: 3	
 			 * Type: 4	
-			 * Name: 讨论组消息处理	
+			 * Name: CommandDigestDiscuss	
 			 * Function: _eventDiscussMsg	
 			 * Priority: 30000	
 			 */	
-			if (AppData.UnityContainer.IsRegistered<IDiscussMessage> ("讨论组消息处理"))	
+			if (AppData.UnityContainer.IsRegistered<IDiscussMessage> ("CommandDigestDiscuss"))	
 			{	
-				Event_eventDiscussMsgHandler += AppData.UnityContainer.Resolve<IDiscussMessage> ("讨论组消息处理").DiscussMessage;	
+				Event_eventDiscussMsgHandler += AppData.UnityContainer.Resolve<IDiscussMessage> ("CommandDigestDiscuss").DiscussMessage;	
 			}	
 			
 			/*	
@@ -288,9 +288,9 @@ namespace Native.App.Export
 		/// 事件回调, 以下是对应 Json 文件的信息	
 		/// <para>Id: 1</para>	
 		/// <para>Type: 21</para>	
-		/// <para>Name: 私聊消息处理</para>	
+		/// <para>Name: CommandDigestPrivate</para>	
 		/// <para>Function: _eventPrivateMsg</para>	
-		/// <para>Priority: 30000</para>	
+		/// <para>Priority: 20000</para>	
 		/// <para>IsRegex: False</para>	
 		/// </summary>	
 		public static event EventHandler<CQPrivateMessageEventArgs> Event_eventPrivateMsgHandler;	
@@ -299,7 +299,7 @@ namespace Native.App.Export
 		{	
 			if (Event_eventPrivateMsgHandler != null)	
 			{	
-				CQPrivateMessageEventArgs args = new CQPrivateMessageEventArgs (AppData.CQApi, AppData.CQLog, 1, 21, "私聊消息处理", "_eventPrivateMsg", 30000, subType, msgId, fromQQ, msg.ToString(CQApi.DefaultEncoding), false);	
+				CQPrivateMessageEventArgs args = new CQPrivateMessageEventArgs (AppData.CQApi, AppData.CQLog, 1, 21, "CommandDigestPrivate", "_eventPrivateMsg", 20000, subType, msgId, fromQQ, msg.ToString(CQApi.DefaultEncoding), false);	
 				Event_eventPrivateMsgHandler (typeof (CQEventExport), args);	
 				return (int)(args.Handler ? CQMessageHandler.Intercept : CQMessageHandler.Ignore);	
 			}	
@@ -310,9 +310,9 @@ namespace Native.App.Export
 		/// 事件回调, 以下是对应 Json 文件的信息	
 		/// <para>Id: 2</para>	
 		/// <para>Type: 2</para>	
-		/// <para>Name: 群消息处理</para>	
+		/// <para>Name: CommandDigestGroup</para>	
 		/// <para>Function: _eventGroupMsg</para>	
-		/// <para>Priority: 30000</para>	
+		/// <para>Priority: 20000</para>	
 		/// <para>IsRegex: False</para>	
 		/// </summary>	
 		public static event EventHandler<CQGroupMessageEventArgs> Event_eventGroupMsgHandler;	
@@ -321,7 +321,7 @@ namespace Native.App.Export
 		{	
 			if (Event_eventGroupMsgHandler != null)	
 			{	
-				CQGroupMessageEventArgs args = new CQGroupMessageEventArgs (AppData.CQApi, AppData.CQLog, 2, 2, "群消息处理", "_eventGroupMsg", 30000, subType, msgId, fromGroup, fromQQ, fromAnonymous, msg.ToString(CQApi.DefaultEncoding), false);	
+				CQGroupMessageEventArgs args = new CQGroupMessageEventArgs (AppData.CQApi, AppData.CQLog, 2, 2, "CommandDigestGroup", "_eventGroupMsg", 20000, subType, msgId, fromGroup, fromQQ, fromAnonymous, msg.ToString(CQApi.DefaultEncoding), false);	
 				Event_eventGroupMsgHandler (typeof (CQEventExport), args);	
 				return (int)(args.Handler ? CQMessageHandler.Intercept : CQMessageHandler.Ignore);	
 			}	
@@ -332,7 +332,7 @@ namespace Native.App.Export
 		/// 事件回调, 以下是对应 Json 文件的信息	
 		/// <para>Id: 3</para>	
 		/// <para>Type: 4</para>	
-		/// <para>Name: 讨论组消息处理</para>	
+		/// <para>Name: CommandDigestDiscuss</para>	
 		/// <para>Function: _eventDiscussMsg</para>	
 		/// <para>Priority: 30000</para>	
 		/// <para>IsRegex: False</para>	
@@ -343,7 +343,7 @@ namespace Native.App.Export
 		{	
 			if (Event_eventDiscussMsgHandler != null)	
 			{	
-				CQDiscussMessageEventArgs args = new CQDiscussMessageEventArgs (AppData.CQApi, AppData.CQLog, 3, 4, "讨论组消息处理", "_eventDiscussMsg", 30000, subType, msgId, fromNative, fromQQ, msg.ToString(CQApi.DefaultEncoding), false);	
+				CQDiscussMessageEventArgs args = new CQDiscussMessageEventArgs (AppData.CQApi, AppData.CQLog, 3, 4, "CommandDigestDiscuss", "_eventDiscussMsg", 30000, subType, msgId, fromNative, fromQQ, msg.ToString(CQApi.DefaultEncoding), false);	
 				Event_eventDiscussMsgHandler (typeof (CQEventExport), args);	
 				return (int)(args.Handler ? CQMessageHandler.Intercept : CQMessageHandler.Ignore);	
 			}	
