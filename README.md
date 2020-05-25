@@ -1,27 +1,13 @@
-## 简介
+## PCR行会战机器人插件
+PCR工会战机器人基于C# Native.Sdk。用户可使用指令登记模拟战信息，统计战况，给出预估伤害值，并使用预估的伤害数值进行排刀。    
+<s>我不是很擅长C# 但是酷Q的Java SDK实属拉跨 饶了我吧（</s>
 
-Native.SDK  是为了方便 .Net 平台开发者高效开发 酷Q应用 的开发框架。封装酷Q 提供的接口，提供了安全高效的Api，同时抽象了事件中的基础数据类型，并且提供了完整的托管异常处理，提供了优秀的开发环境。
+### 伤害预估机制
+伤害预估基于Gaussian分布。算法使用ML Estimation，基于用户的模拟战数据构建Gaussian分布模型，根据Central Limit Theorem构建各个概率下的预估值，并根据Chebyshev Inequality，给出各个预估值的置信度。用户输入的模拟战数据越多，预估值的置信度越高。
 
-## 特点
+### 排刀机制
+令N为参与排刀的队伍数量，K为选中的队伍数量，M为boss的血量。使用动态规划的话时间效率大约为O(Nlog(M))。   
+但是因为M值本身较大，而K值较小，因此使用了伪多项式算法，时间效率为O(NK)，<s>空间效率不是很好看</s>
 
-* 支持原生导出函数，不需要前置插件作为服务端。(能够在 .Net 平台中导出 C/C++ 可用的导出函数)
-* 支持包括 WebServices 在内的所有 .Net 项目进行交互。
-* 支持编译整合DLL。(在编译的同时，对所有使用到的程序集进行整合打包，保证最终结果只有 app.dll)
-* 支持自由调整 .Net Framework 版本
-* 支持 C# 和 VB.NET 两种语言编写代码
-* 使用 UTF-8 编码，并且在托管和非托管之间启用了 GB18030 编码的转换
-* 可以在 <a href="https://cqp.cc/t/42164">酷Q on Docker</a> 中运行。(目前仅支持 .Net Framework 4.5)
-
-## 在线文档
-
-[Native 在线文档](https://native.run/)
-
-## 更新日志
-
-[Native 更新日志](UPDATE.md)
-
-## 关于打赏
-
-您的支持就是我更新的动力!
-
-<img src="https://jie2gg.github.io/Image/AliPlay.png" alt="支付宝二维码" width="260" height="350"><img src="https://jie2gg.github.io/Image/WeChat.png" alt="微信二维码" width="260" height="350">
+### 使用方法/指令表
+参见[这里](usage.md)
