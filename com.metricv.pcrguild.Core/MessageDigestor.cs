@@ -15,7 +15,6 @@ namespace com.metricv.pcrguild.Code {
     public class MessageDigestor : IPrivateMessage, IGroupMessage, IDiscussMessage {
         Regex rx_normalcmd = new Regex(@"[公工行]会战#(?<cmd>.*)");
         public void DiscussMessage(object sender, CQDiscussMessageEventArgs e) {
-            DBManager.addGroupRelation(e.FromDiscuss, e.FromQQ);
             if (e.Message.IsRegexMessage) {
                 String cmd = "";
                 e.Message.RegexResult.TryGetValue("cmd", out cmd);
@@ -24,6 +23,7 @@ namespace com.metricv.pcrguild.Code {
             } else {
                 String msg = e.Message;
                 if (rx_normalcmd.IsMatch(msg)) {
+                    DBManager.addGroupRelation(e.FromDiscuss, e.FromQQ);
                     Match matches = rx_normalcmd.Match(msg);
                     String cmd = matches.Groups["cmd"].Value;
                     e.CQLog.Debug("Expected", $"cmd is {cmd}");
@@ -33,7 +33,6 @@ namespace com.metricv.pcrguild.Code {
         }
 
         public void GroupMessage(object sender, CQGroupMessageEventArgs e) {
-            DBManager.addGroupRelation(e.FromGroup, e.FromQQ);
             if (e.Message.IsRegexMessage) {
                 String cmd = "";
                 e.Message.RegexResult.TryGetValue("cmd", out cmd);
@@ -42,6 +41,7 @@ namespace com.metricv.pcrguild.Code {
             } else {
                 String msg = e.Message;
                 if(rx_normalcmd.IsMatch(msg)) {
+                    DBManager.addGroupRelation(e.FromGroup, e.FromQQ);
                     Match matches = rx_normalcmd.Match(msg);
                     String cmd = matches.Groups["cmd"].Value;
                     e.CQLog.Debug("Expected", $"cmd is {cmd}");
