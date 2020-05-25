@@ -526,7 +526,7 @@ namespace com.metricv.pcrguild.Code {
                 sb.AppendLine(head);
             if (cmd == "版本") {
                 sb.AppendLine("行会战计算器 by MetricVoid");
-                sb.AppendLine("ver. 0.0.1 - INDEV");
+                sb.AppendLine("ver. 1.0.0 - ALPHA");
                 sb.AppendLine("使用 行会战#帮助 查看帮助");
             } else if (rx_addRecord.IsMatch(cmd)) {
                 proc_addRecord(ref sb, cmd, fromQQ, fromGroup);

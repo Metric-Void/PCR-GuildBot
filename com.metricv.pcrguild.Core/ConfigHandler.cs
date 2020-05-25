@@ -26,6 +26,7 @@ namespace com.metricv.pcrguild.Code {
             } else {
                 IniConfig iniConfig = new IniConfig(iniFile);
                 try {
+                    iniConfig.Load();
                     iniConfig.Object["Master"].TryGetValue("MasterQQ", out IValue value);
                     e.CQLog.Info("Debug", value.ToString());
                     ConfigHandler.master_qq = value.ToInt64();
