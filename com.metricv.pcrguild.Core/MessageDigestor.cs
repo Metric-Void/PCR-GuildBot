@@ -69,7 +69,7 @@ namespace com.metricv.pcrguild.Code {
 
         Regex rx_addRecord = new Regex(@"报战\s+队伍=(?<team>.+?)\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?\s*伤害=(?<damage>\d+)");
         Regex rx_seeRecord = new Regex(@"(查询\s+(队伍=(?<team>\S+))?\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?|查询$)");
-        Regex rx_seeAllRecord = new Regex(@"(查询所有\s+(队伍=(?<team>\S+))*\s*(周目=(?<shukai>\d{1,5}))*\s*(BOSS=(?<boss>\d{1,3}))*|查询所有$)");
+        Regex rx_seeAllRecord = new Regex(@"(查[询看]所有\s+(队伍=(?<team>\S+))*\s*(周目=(?<shukai>\d{1,5}))*\s*(BOSS=(?<boss>\d{1,3}))*|查[询看]所有$)");
         Regex rx_rmvRecord = new Regex(@"(删除\s+(队伍=(?<team>\S+))?\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))*\s*(伤害=(?<damage>\d+))?|清空$)");
         Regex rx_sumRecord = new Regex(@"统计\s+队伍=(?<team>.+)\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?");
         Regex rx_teamList = new Regex(@"队伍列表$");
@@ -552,14 +552,13 @@ namespace com.metricv.pcrguild.Code {
             else if (cmd.Equals("帮助")) {
                 sb.AppendLine("方括号代表必要参数 尖括号代表可选参数。");
                 sb.AppendLine("参数顺序必须正确。");
-                sb.AppendLine("在群中报战和统计时，如果群已经预设了周目和BOSS");
-                sb.AppendLine("则可省略周目和BOSS的参数。");
+                sb.AppendLine(@"请前往 https://github.com/Metric-Void/PCR-GuildBot/blob/master/usage.md 查看更详细的解释");
                 sb.AppendLine("====== 个人指令 ======");
                 sb.AppendLine("报战 队伍=[队伍名] 周目=[数字] BOSS=[数字] 伤害=[数字]");
                 sb.AppendLine("查询 <队伍=[队伍名]> <周目=[数字]> <BOSS=[数字]>");
                 sb.AppendLine("统计 队伍=[队伍名] 周目=[数字] BOSS=[数字]");
                 sb.AppendLine("删除 <队伍=[队伍名]> <周目=[数字]> <BOSS=[数字]> <伤害=[数字]>");
-                sb.AppendLine("队伍列表");
+                sb.AppendLine("无参数指令 队伍列表、版本、帮助。");
                 sb.AppendLine("====== 群聊指令 ======");
                 sb.AppendLine("查询所有 <队伍=[队伍名]> <周目=[数字]> <BOSS=[数字]>");
                 sb.AppendLine("预设 周目=[数字] BOSS=[数字]");
