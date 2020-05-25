@@ -18,11 +18,6 @@ namespace com.metricv.pcrguild.Code {
             DBManager.addGroupRelation(e.FromDiscuss, e.FromQQ);
             if (e.Message.IsRegexMessage) {
                 String cmd = "";
-                e.CQLog.Debug("Expected", "收到正则消息");
-                e.CQLog.Debug("Expected-Raw", e.Message.Text);
-                e.CQLog.Debug("Expected-RegResult", e.Message.RegexResult);
-                e.CQLog.Debug("Expected-Keys", e.Message.RegexResult.Keys.ToString());
-                e.CQLog.Debug("Expected-Values", e.Message.RegexResult.Values.ToString());
                 e.Message.RegexResult.TryGetValue("cmd", out cmd);
                 e.CQLog.Debug("Expected", $"cmd is {cmd}");
                 e.CQApi.SendDiscussMessage(e.FromDiscuss, replyRaw("[CQ:at,qq=" + e.FromQQ.ToString() + "]", cmd, e.FromQQ.Id, e.FromDiscuss.Id));
@@ -41,11 +36,6 @@ namespace com.metricv.pcrguild.Code {
             DBManager.addGroupRelation(e.FromGroup, e.FromQQ);
             if (e.Message.IsRegexMessage) {
                 String cmd = "";
-                e.CQLog.Debug("Expected", "收到正则消息");
-                e.CQLog.Debug("Expected-Raw", e.Message.Text);
-                e.CQLog.Debug("Expected-RegResult", e.Message.RegexResult);
-                e.CQLog.Debug("Expected-Keys", e.Message.RegexResult.Keys.ToString());
-                e.CQLog.Debug("Expected-Values", e.Message.RegexResult.Values.ToString());
                 e.Message.RegexResult.TryGetValue("cmd", out cmd);
                 e.CQLog.Debug("Expected", $"cmd is {cmd}");
                 e.CQApi.SendGroupMessage(e.FromGroup, replyRaw("[CQ:at,qq="+e.FromQQ.ToString()+"]", cmd, e.FromQQ.Id, e.FromGroup.Id));
@@ -63,11 +53,6 @@ namespace com.metricv.pcrguild.Code {
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e) {
             if (e.Message.IsRegexMessage) {
                 String cmd = "";
-                e.CQLog.Debug("Expected", "收到正则消息");
-                e.CQLog.Debug("Expected-Raw",e.Message.Text);
-                e.CQLog.Debug("Expected-RegResult", e.Message.RegexResult);
-                e.CQLog.Debug("Expected-Keys", e.Message.RegexResult.Keys.ToString());
-                e.CQLog.Debug("Expected-Values", e.Message.RegexResult.Values.ToString());
                 e.Message.RegexResult.TryGetValue("cmd", out cmd);
                 e.CQLog.Debug("Expected", $"cmd is {cmd}");
                 e.CQApi.SendPrivateMessage(e.FromQQ, replyRaw("", cmd, e.FromQQ.Id, 0));

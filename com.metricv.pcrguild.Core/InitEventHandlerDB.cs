@@ -19,12 +19,12 @@ namespace com.metricv.pcrguild.Code {
             ConfigHandler.loadConfig(e);
 
             String dbFile = e.CQApi.AppDirectory + "com.metricv.pcrguild.db";
-            e.CQLog.Info("Info.Init","com.metricv.pcrguild is initializing...");
+            e.CQLog.Info("工会战排刀器","正在加载...");
 
             DBManager.up(e);
             DBManager.addManager();
 
-            e.CQLog.Info("Info.Init", "com.metricv.pcrguild initialized");
+            e.CQLog.Info("工会战排刀器", "加载完成");
         }
     }
 }

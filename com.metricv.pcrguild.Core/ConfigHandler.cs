@@ -22,18 +22,16 @@ namespace com.metricv.pcrguild.Code {
                     {"MasterQQ", 0}
                 };
                 iniConfig.Save();
-                e.CQLog.Info("Info.Init", "config.ini created. Please update.");
+                e.CQLog.Info("工会战排刀器", "生成了config.ini,请更新其中的信息。");
             } else {
                 IniConfig iniConfig = new IniConfig(iniFile);
                 try {
-                    //master_qq = 
-                    e.CQLog.Info("Debug", iniConfig.Load());
-                    e.CQLog.Info("Debug", iniConfig.Object["Master"].TryGetValue("MasterQQ", out IValue value));
+                    iniConfig.Object["Master"].TryGetValue("MasterQQ", out IValue value);
                     e.CQLog.Info("Debug", value.ToString());
                     ConfigHandler.master_qq = value.ToInt64();
-                    e.CQLog.Info("Config Loaded. Master is " + master_qq.ToString());
+                    e.CQLog.Info("工会战排刀器", "配置已加载，master是" + master_qq.ToString());
                 } catch {
-                    e.CQLog.Error("Info.Init", "Error reading config.ini");
+                    e.CQLog.Error("工会战排刀器", "读取config.ini时发生错误");
                 }
             }
         }
