@@ -209,7 +209,7 @@ namespace com.metricv.pcrguild.Code {
             try {
                 List<Dictionary<String, Object>> results = DBManager.searchGroupRecord(fromGroup, team, shukai, bossid, true);
                 foreach (Dictionary<String, Object> iter in results) {
-                    sb.AppendLine($"{iter["qq_num"]} [队伍:{iter["team"]}，周目：{iter["shukai"]}，Boss序号：{iter["boss"]}，伤害：{iter["damage"]}]");
+                    sb.AppendLine($"[CQ:at,qq={iter["qq_num"]}] [队伍:{iter["team"]}，周目：{iter["shukai"]}，Boss序号：{iter["boss"]}，伤害：{iter["damage"]}]");
                 }
             } catch (Exception e) {
                 sb.AppendLine("查询失败（这不是你的错）");
