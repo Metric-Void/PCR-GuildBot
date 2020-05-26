@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace com.metricv.pcrguild.Code {
     public class GroupAddEvent : IGroupAddRequest {
+
+        /**
+         * For some reason, this method does not always get called on given events.
+         * As a fix, all group managers are grant the permission when they execute a command.
+         */ 
         public void GroupAddRequest(object sender, CQGroupAddRequestEventArgs e) {
             if(e.SubType == CQGroupAddRequestType.RobotBeInviteAddGroup) {
                 e.CQLog.Info("Info.AddGroup", $"机器人被邀请进群 {e.FromGroup?.Id ?? -1}");

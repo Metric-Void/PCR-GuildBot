@@ -13,18 +13,19 @@ namespace com.metricv.pcrguild.Code {
     public class InitEventHandlerDB : IAppEnable, IAppDisable {
         public void AppDisable(object sender, CQAppDisableEventArgs e) {
             DBManager.down(e);
+            e.CQLog.Info("行会战排刀器", "成功卸载");
         }
 
         public void AppEnable(object sender, CQAppEnableEventArgs e) {
             ConfigHandler.loadConfig(e);
 
             String dbFile = e.CQApi.AppDirectory + "com.metricv.pcrguild.db";
-            e.CQLog.Info("工会战排刀器","正在加载...");
+            e.CQLog.Info("行会战排刀器", "正在加载...");
 
             DBManager.up(e);
             DBManager.addManager();
 
-            e.CQLog.Info("工会战排刀器", "加载完成");
+            e.CQLog.Info("行会战排刀器", "加载完成");
         }
     }
 }

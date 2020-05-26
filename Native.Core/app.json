@@ -6,7 +6,7 @@
 	"ret": 1,
 	"apiver": 9,
 	"name": "公主焊接工会战排刀器",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"version_id": 1,
 	"author": "MetricVoid",
 	"description": "使用概率分布和背包问题 收集数据来排刀",
@@ -127,8 +127,11 @@
 		101, //发送群消息         sendGroupMsg
 		103, //发送讨论组消息     sendDiscussMsg
 		106, //发送私聊消息       sendPrivateMsg
+		130, //取群成员信息       getGroupMemberInfo
+		131, //取陌生人信息       getStrangerInfo
+		132, //取群信息           getGroupInfo
 		140, //置讨论组退出       setDiscussLeave
 		150, //置好友添加请求     setFriendAddRequest
-		151, //置群添加请求       setGroupAddRequest
+		151 //置群添加请求       setGroupAddRequest
 	]
 }

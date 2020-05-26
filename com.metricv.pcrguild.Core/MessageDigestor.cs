@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Native.Sdk.Cqp.Enum;
 
 namespace com.metricv.pcrguild.Code {
     public class MessageDigestor : IPrivateMessage, IGroupMessage, IDiscussMessage {
@@ -23,7 +24,9 @@ namespace com.metricv.pcrguild.Code {
             } else {
                 String msg = e.Message;
                 if (rx_normalcmd.IsMatch(msg)) {
-                    DBManager.addGroupRelation(e.FromDiscuss, e.FromQQ);
+                    DBManager.addGroupRelation(e.FromDiscuss, e.FromQQ.Id);
+                    // In a discussion group, everyone has the permission to operate.
+                    DBManager.addGroupRelation(e.FromDiscuss.Id, e.FromQQ.Id);
                     Match matches = rx_normalcmd.Match(msg);
                     String cmd = matches.Groups["cmd"].Value;
                     e.CQLog.Debug("Expected", $"cmd is {cmd}");
@@ -42,6 +45,10 @@ namespace com.metricv.pcrguild.Code {
                 String msg = e.Message;
                 if(rx_normalcmd.IsMatch(msg)) {
                     DBManager.addGroupRelation(e.FromGroup, e.FromQQ);
+                    QQGroupMemberType temp_mtype = e.FromGroup.GetGroupMemberInfo(e.FromQQ.Id).MemberType;
+                    if (temp_mtype == QQGroupMemberType.Creator || temp_mtype == QQGroupMemberType.Manage) {
+                        DBManager.addGroupRelation(e.FromGroup.Id, e.FromQQ.Id);
+                    }
                     Match matches = rx_normalcmd.Match(msg);
                     String cmd = matches.Groups["cmd"].Value;
                     e.CQLog.Debug("Expected", $"cmd is {cmd}");
