@@ -26,7 +26,7 @@ namespace com.metricv.pcrguild.Code {
                 if (rx_normalcmd.IsMatch(msg)) {
                     DBManager.addGroupRelation(e.FromDiscuss, e.FromQQ.Id);
                     // In a discussion group, everyone has the permission to operate.
-                    DBManager.addGroupRelation(e.FromDiscuss.Id, e.FromQQ.Id);
+                    DBManager.addManager(e.FromDiscuss.Id, e.FromQQ.Id);
                     Match matches = rx_normalcmd.Match(msg);
                     String cmd = matches.Groups["cmd"].Value;
                     e.CQLog.Debug("Expected", $"cmd is {cmd}");
@@ -47,7 +47,7 @@ namespace com.metricv.pcrguild.Code {
                     DBManager.addGroupRelation(e.FromGroup, e.FromQQ);
                     QQGroupMemberType temp_mtype = e.FromGroup.GetGroupMemberInfo(e.FromQQ.Id).MemberType;
                     if (temp_mtype == QQGroupMemberType.Creator || temp_mtype == QQGroupMemberType.Manage) {
-                        DBManager.addGroupRelation(e.FromGroup.Id, e.FromQQ.Id);
+                        DBManager.addManager(e.FromGroup.Id, e.FromQQ.Id);
                     }
                     Match matches = rx_normalcmd.Match(msg);
                     String cmd = matches.Groups["cmd"].Value;
@@ -537,7 +537,7 @@ namespace com.metricv.pcrguild.Code {
                 sb.AppendLine(head);
             if (cmd == "版本") {
                 sb.AppendLine("行会战计算器 by MetricVoid");
-                sb.AppendLine("ver. 1.0.2 - ALPHA");
+                sb.AppendLine("ver. 1.0.4 - ALPHA");
                 sb.AppendLine("使用 行会战#帮助 查看帮助");
             } else if (rx_addRecord.IsMatch(cmd)) {
                 proc_addRecord(ref sb, cmd, fromQQ, fromGroup);
