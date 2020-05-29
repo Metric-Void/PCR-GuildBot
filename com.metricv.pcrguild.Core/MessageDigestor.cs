@@ -14,7 +14,7 @@ using Native.Sdk.Cqp.Enum;
 
 namespace com.metricv.pcrguild.Code {
     public class MessageDigestor : IPrivateMessage, IGroupMessage, IDiscussMessage {
-        Regex rx_normalcmd = new Regex(@"[公工行]会战#(?<cmd>.*)");
+        Regex rx_normalcmd = new Regex(@"[公工行]会战[#＃]\s*(?<cmd>.*)");
         public void DiscussMessage(object sender, CQDiscussMessageEventArgs e) {
             if (e.Message.IsRegexMessage) {
                 String cmd = "";
@@ -74,11 +74,11 @@ namespace com.metricv.pcrguild.Code {
             }
         }
 
-        Regex rx_addRecord = new Regex(@"报战\s+队伍=(?<team>.+?)\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?\s*伤害=(?<damage>\d+)");
+        Regex rx_addRecord = new Regex(@"报战\s+队伍=(?<team>\S+?)\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?\s*伤害=(?<damage>\d+)");
         Regex rx_seeRecord = new Regex(@"(查询\s+(队伍=(?<team>\S+))?\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?|查询$)");
         Regex rx_seeAllRecord = new Regex(@"(查[询看]所有\s+(队伍=(?<team>\S+))*\s*(周目=(?<shukai>\d{1,5}))*\s*(BOSS=(?<boss>\d{1,3}))*|查[询看]所有$)");
-        Regex rx_rmvRecord = new Regex(@"(删除\s+(队伍=(?<team>\S+))?\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))*\s*(伤害=(?<damage>\d+))?|清空$)");
-        Regex rx_sumRecord = new Regex(@"统计\s+队伍=(?<team>.+)\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?");
+        Regex rx_rmvRecord = new Regex(@"(删除\s+(队伍=(?<team>\S+))?\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))*\s*(伤害=(?<damage>\d+))?|清空$|删除$)");
+        Regex rx_sumRecord = new Regex(@"统计\s+队伍=(?<team>\S+)\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?");
         Regex rx_teamList = new Regex(@"队伍列表$");
         Regex rx_addAdmin = new Regex(@"添加群管\s*((\d+)|(\[CQ:at,qq=(\d+)\]))");
         Regex rx_arrange = new Regex(@"排刀\s*((?<percent>\d+)%)?\s*(周目=(?<shukai>\d{1,5}))?\s*(BOSS=(?<boss>\d{1,3}))?\s*残血=(?<rem>\d+)");
@@ -537,7 +537,7 @@ namespace com.metricv.pcrguild.Code {
                 sb.AppendLine(head);
             if (cmd == "版本") {
                 sb.AppendLine("行会战计算器 by MetricVoid");
-                sb.AppendLine("ver. 1.0.4 - ALPHA");
+                sb.AppendLine("ver. 1.0.5 - ALPHA");
                 sb.AppendLine("使用 行会战#帮助 查看帮助");
             } else if (rx_addRecord.IsMatch(cmd)) {
                 proc_addRecord(ref sb, cmd, fromQQ, fromGroup);
@@ -563,13 +563,13 @@ namespace com.metricv.pcrguild.Code {
             else if (cmd.Equals("帮助")) {
                 sb.AppendLine("方括号代表必要参数 尖括号代表可选参数。");
                 sb.AppendLine("参数顺序必须正确。");
-                sb.AppendLine(@"请前往 https://github.com/Metric-Void/PCR-GuildBot/blob/master/usage.md 查看更详细的解释");
+                sb.AppendLine(@"请前往 https://github.com/Metric-Void/PCR-GuildBot/blob/master/usage.md 查看完整解释");
                 sb.AppendLine("====== 个人指令 ======");
                 sb.AppendLine("报战 队伍=[队伍名] 周目=[数字] BOSS=[数字] 伤害=[数字]");
                 sb.AppendLine("查询 <队伍=[队伍名]> <周目=[数字]> <BOSS=[数字]>");
                 sb.AppendLine("统计 队伍=[队伍名] 周目=[数字] BOSS=[数字]");
                 sb.AppendLine("删除 <队伍=[队伍名]> <周目=[数字]> <BOSS=[数字]> <伤害=[数字]>");
-                sb.AppendLine("无参数指令 队伍列表、版本、帮助。");
+                sb.AppendLine("无参数指令：清空、队伍列表、版本、帮助。");
                 sb.AppendLine("====== 群聊指令 ======");
                 sb.AppendLine("查询所有 <队伍=[队伍名]> <周目=[数字]> <BOSS=[数字]>");
                 sb.AppendLine("预设 周目=[数字] BOSS=[数字]");
